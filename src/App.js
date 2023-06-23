@@ -53,9 +53,10 @@ function App() {
 
   return (
     <div className="App">
+      <h1>Snack Table</h1>
       <input
         type="text"
-        placeholder="Search snacks"
+        placeholder="Search snacks with product name or ingredients..."
         value={searchText}
         onChange={handleSearch}
       />
