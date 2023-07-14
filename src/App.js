@@ -16,40 +16,68 @@ function App() {
     }
   };
 
-  const sortedData = () => {
-    let sortedData = [...snacks];
+  // const sortedData = () => {
+  //   let sortedData = [...snacks];
 
-    if (sortColumn) {
-      sortedData.sort((a, b) => {
-        const valueA = a[sortColumn];
-        const valueB = b[sortColumn];
+  //   if (sortColumn) {
+  //     sortedData.sort((a, b) => {
+  //       const valueA = a[sortColumn];
+  //       const valueB = b[sortColumn];
 
-        if (typeof valueA === "string") {
-          return sortOrder === "asc"
-            ? valueA.toLowerCase(valueB)
-            : valueB.toLowerCase(valueA);
-        } else {
-          return sortOrder === "asc" ? valueA - valueB : valueB - valueA;
-        }
-      });
-    }
+  //       if (typeof valueA === "string") {
+  //         return sortOrder === "asc"
+  //           ? valueA.toLowerCase(valueB)
+  //           : valueB.toLowerCase(valueA);
+  //       } else {
+  //         return sortOrder === "asc" ? valueA - valueB : valueB - valueA;
+  //       }
+  //     });
+  //   }
 
-    return sortedData;
-  };
+  //   return sortedData;
+  // };
+
+  let sortedData = [...snacks];
+
+  if (sortColumn) {
+    sortedData.sort((a, b) => {
+      const valueA = a[sortColumn];
+      const valueB = b[sortColumn];
+
+      if (typeof valueA === "string") {
+        return sortOrder === "asc"
+          ? valueA.toLowerCase(valueB)
+          : valueB.toLowerCase(valueA);
+      } else {
+        return sortOrder === "asc" ? valueA - valueB : valueB - valueA;
+      }
+    });
+  }
+
+  const sortedDataArray = sortedData;
 
   const handleSearch = (e) => {
     setSearchText(e.target.value.toLowerCase());
   };
 
-  const filteredData = () => {
-    return sortedData().filter(
-      (snack) =>
-        snack.product_name.toLowerCase().includes(searchText) ||
-        snack.ingredients.some((ingredient) =>
-          ingredient.toLowerCase().includes(searchText)
-        )
-    );
-  };
+  // const filteredData = () => {
+  //   return sortedDataArray.filter(
+  //     (snack) =>
+  //       snack.product_name.toLowerCase().includes(searchText) ||
+  //       snack.ingredients.some((ingredient) =>
+  //         ingredient.toLowerCase().includes(searchText)
+  //       )
+  //   );
+  // };
+
+  const filteredDataArray = sortedDataArray.filter(
+    (snack) =>
+      snack.product_name.toLowerCase().includes(searchText) ||
+      snack.ingredients.some((ingredient) =>
+        ingredient.toLowerCase().includes(searchText)
+      )
+  );
+  // filteredData();
 
   return (
     <div className="App">
@@ -70,7 +98,7 @@ function App() {
           <th onClick={() => handleSort("ingredients")}>Ingredients</th>
         </tr>
 
-        {filteredData().map((snack) => (
+        {filteredDataArray.map((snack) => (
           <tr key={snack.id}>
             <td>{snack.id}</td>
             <td>{snack.product_name}</td>
